@@ -11,3 +11,11 @@ Dopo aggiungete Bootstrap e mostrate le informazioni con una tabella.
 2 - Aggiungere un secondo campo al form che permetta di filtrare gli hotel per voto (es. inserisco 3 ed ottengo tutti gli hotel che hanno un voto di tre stelle o superiore)
 NOTA: deve essere possibile utilizzare entrambi i filtri contemporaneamente (es. ottenere una lista con hotel che dispongono di parcheggio e che hanno un voto di tre stelle o superiore)
 Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gli hotel.
+
+Pseudocodice
+
+1 copio e incollo l'array dal sito al file index.php
+2 ciclo l'array
+3 stampo i dati nella pagina
+4 importo bootstrap e inserisco la struttura della tabella
+5 mostro i dati nella tabella
