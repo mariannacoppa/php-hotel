@@ -39,7 +39,6 @@
         ],
 
     ];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +53,7 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">PHP Hotel</h1>
-
+                <p><?php var_dump($hotels); ?></p>
             </div>
         </div>
     </div>
