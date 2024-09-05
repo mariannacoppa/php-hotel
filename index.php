@@ -53,7 +53,18 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">PHP Hotel</h1>
-                <p><?php var_dump($hotels); ?></p>
+                <ul>
+                    <?php foreach($hotels as $hotel) { ?>
+                        <li>
+                            
+                            <?php foreach($hotel as $key => $hotel) { ?>
+                                <p><?php echo $key." ".$hotel; ?></p>
+                                
+                            <?php }; ?>
+                            <p><?php echo "----------------------------------------"; ?></p>
+                        </li>  
+                    <?php }; ?>
+                </ul>
             </div>
         </div>
     </div>
