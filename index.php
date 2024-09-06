@@ -39,7 +39,24 @@
         ],
 
     ];
-    
+    // dichiaro un array per il filtraggio
+    $filteredHotels = $hotels;
+    // verifico l'esistenza della variabile relativa al parcheggio e se è diversa da stringa vuota
+    if (isset($_GET['parking']) && $_GET['parking'] != '') {
+        // dichiaro una variabile temporanea per gli hotels
+        $tempHotels = [];
+        // ciclo gli hotels
+        foreach($hotels as $hotel) {
+            // verifico che l'hotel abbia il parcheggio in base al valore selezionato dall'utente
+            if ($_GET['parking'] == $hotel['parking']) {
+                // se è vera la condizione inserisco l'hotel nell'array temporaneo
+                $tempHotels [] = $hotel;
+            }
+        }
+        // assegno il valore contenuto nell'array temporaneo alla variabile filteredHotels
+        $filteredHotels = $tempHotels;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +70,32 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+                <h1 class="text-center">BoolHotels</h1>
+            </div>        
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <form action="./bonus.php" method="GET">
+                    <div class="row">
+                        <div class="col-5">
+                            <select name="parking" id="parking" class="form-select form-select-sm">
+                                <option value="">Parcheggio</option>
+                                <option value="0" <?php echo (isset($_GET['parking']) && $_GET['parking'] == 0) ? 'selected' : ''; ?> >No</option>
+                                <option value="1" <?php echo (isset($_GET['parking']) && $_GET['parking'] == 1) ? 'selected' : ''; ?> >Sì</option>
+                            </select>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" class="form-control form-control-sm" name="vote" placeholder="voto">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-sm btn-primary">Cerca</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
                 <h1 class="text-center">PHP Hotel</h1>
                 <table class="table table-striped">
                     <thead>
@@ -65,15 +108,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($hotels as $hotel) { ?>
+                        <?php foreach($filteredHotels as $hotel) { ?>
                             <tr>
                                 <td>
                                     <?php echo $hotel['name']; ?>
                                 </td>
                                 <td>
                                     <?php 
-                                        $hotel_description = explode(' ', $hotel['description']);
-                                        echo $hotel_description[0]." ".$hotel_description[1];
+                                        echo str_replace('Descrizione', '', $hotel['description']);
                                     ?>
                                 </td>
                                 <td>

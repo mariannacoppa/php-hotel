@@ -39,6 +39,24 @@
         ],
 
     ];
+    // dichiaro un array per il filtraggio
+    $filteredHotels = $hotels;
+    // verifico l'esistenza della variabile relativa al parcheggio e se è diversa da stringa vuota
+    if (isset($_GET['parking']) && $_GET['parking'] != '') {
+        // dichiaro una variabile temporanea per gli hotels
+        $tempHotels = [];
+        // ciclo gli hotels
+        foreach($hotels as $hotel) {
+            // verifico che l'hotel abbia il parcheggio in base al valore selezionato dall'utente
+            if ($_GET['parking'] == $hotel['parking']) {
+                // se è vera la condizione inserisco l'hotel nell'array temporaneo
+                $tempHotels [] = $hotel;
+            }
+        }
+        // assegno il valore contenuto nell'array temporaneo alla variabile filteredHotels
+        $filteredHotels = $tempHotels;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,8 +80,8 @@
                         <div class="col-5">
                             <select name="parking" id="parking" class="form-select form-select-sm">
                                 <option value="">Parcheggio</option>
-                                <option value="0">No</option>
-                                <option value="1">Sì</option>
+                                <option value="0" <?php echo (isset($_GET['parking']) && $_GET['parking'] == 0) ? 'selected' : ''; ?> >No</option>
+                                <option value="1" <?php echo (isset($_GET['parking']) && $_GET['parking'] == 1) ? 'selected' : ''; ?> >Sì</option>
                             </select>
                         </div>
                         <div class="col-5">
@@ -90,7 +108,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($hotels as $hotel) { ?>
+                        <?php foreach($filteredHotels as $hotel) { ?>
                             <tr>
                                 <td>
                                     <?php echo $hotel['name']; ?>
