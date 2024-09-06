@@ -46,9 +46,25 @@
         // dichiaro una variabile temporanea per gli hotels
         $tempHotels = [];
         // ciclo gli hotels
-        foreach($hotels as $hotel) {
+        foreach($filteredHotels as $hotel) {
             // verifico che l'hotel abbia il parcheggio in base al valore selezionato dall'utente
             if ($_GET['parking'] == $hotel['parking']) {
+                // se è vera la condizione inserisco l'hotel nell'array temporaneo
+                $tempHotels [] = $hotel;
+            }
+        }
+        // assegno il valore contenuto nell'array temporaneo alla variabile filteredHotels
+        $filteredHotels = $tempHotels;
+    }
+
+    // verifico l'esistenza della variabile relativa al voto e se è diversa da stringa vuota
+    if (isset($_GET['vote']) && $_GET['vote'] != '') {
+        // dichiaro una variabile temporanea per gli hotels
+        $tempHotels = [];
+        // ciclo gli hotels
+        foreach($filteredHotels as $hotel) {
+            // verifico che l'hotel abbia il voto in base al valore selezionato dall'utente
+            if ($_GET['vote'] <= $hotel['vote']) {
                 // se è vera la condizione inserisco l'hotel nell'array temporaneo
                 $tempHotels [] = $hotel;
             }
@@ -85,7 +101,8 @@
                             </select>
                         </div>
                         <div class="col-5">
-                            <input type="text" class="form-control form-control-sm" name="vote" placeholder="voto">
+                            <input type="text" class="form-control form-control-sm" name="vote" placeholder="voto" value="<?php 
+                            echo $_GET['vote'] ?? '' ?>">
                         </div>
                         <div class="col-2">
                             <button type="submit" class="btn btn-sm btn-primary">Cerca</button>
