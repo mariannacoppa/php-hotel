@@ -71,7 +71,10 @@
                                     <?php echo $hotel['name']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $hotel['description']; ?>
+                                    <?php 
+                                        $hotel_description = explode(' ', $hotel['description']);
+                                        echo $hotel_description[0]." ".$hotel_description[1];
+                                    ?>
                                 </td>
                                 <td>
                                     <?php echo $hotel['parking'] ? 'Sì' : 'No'; ?>
@@ -86,16 +89,6 @@
                         <?php } ?>
                     </tbody>
                 </table>
-                <ul>
-                    <?php foreach($hotels as $hotel) { ?>
-                        <li>
-                            <?php foreach($hotel as $key => $hotel) { ?>
-                                <p><?php echo $key." ".$hotel; ?></p>                     
-                            <?php }; ?>
-                            <p><?php echo "----------------------------------------------"; ?></p>
-                        </li>  
-                    <?php }; ?>
-                </ul>
             </div>
         </div>
     </div>
