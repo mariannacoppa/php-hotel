@@ -39,6 +39,7 @@
         ],
 
     ];
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,15 +54,45 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">PHP Hotel</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrizione</th>
+                            <th>Parcheggio</th>
+                            <th>Voto</th>
+                            <th>Distanza dal centro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($hotels as $hotel) { ?>
+                            <tr>
+                                <td>
+                                    <?php echo $hotel['name']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['description']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['parking'] ? 'Sì' : 'No'; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['vote']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['distance_to_center']; ?> Km
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
                 <ul>
                     <?php foreach($hotels as $hotel) { ?>
                         <li>
-                            
                             <?php foreach($hotel as $key => $hotel) { ?>
-                                <p><?php echo $key." ".$hotel; ?></p>
-                                
+                                <p><?php echo $key." ".$hotel; ?></p>                     
                             <?php }; ?>
-                            <p><?php echo "----------------------------------------"; ?></p>
+                            <p><?php echo "----------------------------------------------"; ?></p>
                         </li>  
                     <?php }; ?>
                 </ul>
